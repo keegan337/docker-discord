@@ -1,15 +1,22 @@
 # docker-discord
+To run this simply run docker-compose up -d.
+Make sure you adjust the following environment variables accordingly:
+ - /var/run/user/1000/bus:/var/run/user/1000/bus
+ - /var/run/user/1000/pulse:/var/run/user/1000/pulse
+ - DISPLAY=unix:0
+
+Pre my changes:
 
 This will run the latest release version of Discord in a Docker container:
 
 Canary:
-    
+
     keyglitch/discord:canary
-    
+
 Stable:
 
     keyglitch/discord:stable
-    
+
 
 Depending on the version, Discord will likely download updates and quit, stopping the container -- just re-run to start since the volume it downloads to is persisted.
 
