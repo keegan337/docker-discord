@@ -1,0 +1,31 @@
+version: '2'
+services:
+  discord:
+    image: 'keyglitch/discord:stable'
+    group_add:
+      - 29
+    privileged: true
+    volumes:
+      - './discordSettings:/home/discord:rw'
+      - '/tmp/.X11-unix:/tmp/.X11-unix'
+      - './discordSettings:/home/discord'
+      - '/dev/shm:/dev/shm:z'
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/var/run/dbus:/var/run/dbus'
+      - '/var/run/user/1000/bus:/var/run/user/1000/bus'
+      - '/var/run/user/1000/pulse:/var/run/user/1000/pulse'
+
+    devices:
+      - /dev/snd
+    environment:
+      - 'DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/user/1000/bus'
+      - 'PULSE_SERVER=unix:/run/user/1000/pulse/native'
+      - DISPLAY=unix:0
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.discord.rule=Host(`${TRAEFIK_API_RULE_DISCORD}`)"
+      - "traefik.http.routers.discord.entrypoints=${TRAEFIK_ENTRYPOINT}"
+networks:
+  default:
+    external:
+      name: "${INETHI_NETWORK}"
