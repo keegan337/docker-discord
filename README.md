@@ -1,11 +1,17 @@
 # docker-discord
-To run this simply run docker-compose up -d.
+
+## Reasons to run this:
+- If you're like me and have no space on your PC then you can run this on a server you have in your house and not have the discord app and its cache filling up your harddrive
+- You like to do weird things with docker
+
+To run this simply run ``` docker-compose up -d ```. This works when you have a Traefik docker container running and a docker bridge network. I run Traefik with dnsmasq on a local ubuntu 20 server and it works well. Find that code [here](https://github.com/keegan337/docker-master/tree/master/traefik-with-dnsmasq) and remember to disable your local dns so dnsmasq can bind on port 53. See the readme [here](https://github.com/keegan337/docker-master/tree/master/) for detail on how to do that. Enjoy!
+
 Make sure you adjust the following environment variables accordingly:
  - /var/run/user/1000/bus:/var/run/user/1000/bus
  - /var/run/user/1000/pulse:/var/run/user/1000/pulse
  - DISPLAY=unix:0
 
-Pre my changes:
+## Pre my changes:
 
 This will run the latest release version of Discord in a Docker container:
 
